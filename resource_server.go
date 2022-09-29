@@ -43,6 +43,8 @@ func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
 	instance := d.Get("instance").(string)
 	policy := d.Get("policy").(string)
 	uid, _ := uuid.NewUUID()
+	// delete resource policy no matter exist or not
+	deleteResourcePolicy(project, zone, instance, policy)
 	err := addResourcePolicy(project, zone, instance, policy)
 	if err != nil {
 		return err
